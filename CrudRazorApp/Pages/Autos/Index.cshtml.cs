@@ -1,22 +1,22 @@
-using CrudRazorApp.Data;
-using CrudRazorApp.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using CrudRazorApp.Data;
+using CrudRazorApp.Models;
 
-namespace CrudRazorApp.Pages.Productos
+namespace CrudRazorApp.Pages.Autos
 {
     public class IndexModel : PageModel
     {
         private readonly AppDbContext _context;
         public IndexModel(AppDbContext context) => _context = context;
 
-        public IList<Producto> ListaProductos { get; set; } = new List<Producto>();
+        public IList<Auto> Autos { get; set; } = new List<Auto>();
 
         public async Task OnGetAsync()
         {
-            ListaProductos = await _context.Productos
-                .FromSqlRaw("EXEC sp_GetProductos")
-                .ToListAsync();
+            Autos = await _context.Autos.AsNoTracking().ToListAsync();
         }
     }
 }

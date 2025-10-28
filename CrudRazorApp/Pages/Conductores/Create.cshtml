@@ -1,0 +1,15 @@
+﻿@page
+@model CrudRazorApp.Pages.Conductores.CreateModel
+
+<h1>Crear Conductor</h1>
+
+<form method="post">
+  <div><label>Nombre</label><input asp-for="Conductor.Nombre" /></div>
+  <div><label>Apellido</label><input asp-for="Conductor.Apellido" /></div>
+  <div><label>Fecha Nacimiento</label><input asp-for="Conductor.FechaNacimiento" type="date" /></div>
+  <div><label>Teléfono</label><input asp-for="Conductor.Telefono" type="number" /></div>
+  <div><label>Email</label><input asp-for="Conductor.Email" /></div>
+  <div><label>Licencia</label><input asp-for="Conductor.Licencia" /></div>
+  <button type="submit">Guardar</button>
+  <a asp-page="./Index">Cancelar</a>
+</form>

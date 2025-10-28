@@ -1,0 +1,21 @@
+@page
+@model CrudRazorApp.Pages.Reservas.CreateModel
+
+<section class="card">
+  <h2>Nueva Reserva</h2>
+  <form method="post" class="form-grid">
+    <label>Auto
+      <select asp-for="Reserva.AutoId" asp-items="Model.AutosList"></select>
+    </label>
+    <label>Conductor
+      <select asp-for="Reserva.ConductorId" asp-items="Model.ConductoresList"></select>
+    </label>
+    <label>Fecha inicio<input asp-for="Reserva.FechaInicio" type="datetime-local" /></label>
+    <label>Fecha fin<input asp-for="Reserva.FechaFin" type="datetime-local" /></label>
+
+    <div class="actions">
+      <button class="btn-primary" type="submit">Reservar</button>
+      <a class="btn-secondary" asp-page="./Index">Cancelar</a>
+    </div>
+  </form>
+</section>

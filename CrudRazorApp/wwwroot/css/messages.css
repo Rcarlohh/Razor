@@ -54,17 +54,21 @@
 .close-button:hover {
     opacity: 1;
 }
-
-/* Hero (imagen horizontal en la parte superior que se desvanece al hacer scroll) */
+/* Hero (imagen de fondo completo que se desvanece al hacer scroll) */
 .hero {
     position: relative;
-    width: 100%;
-    height: 45vh;
-    max-height: 500px;
-    min-height: 260px;
+    width: 100vw;
+    height: 60vh;
+    max-height: 600px;
+    min-height: 400px;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    margin-top: -3rem;
+    margin-bottom: 3rem;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,90 +76,65 @@
     transition: opacity 0.4s ease-out, transform 0.4s ease-out;
     will-change: opacity, transform;
     z-index: 0;
+    overflow: hidden;
 }
 
-.hero::after {
-    /* ligera máscara para mejorar legibilidad del texto sobre la imagen */
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 40%, rgba(255,255,255,0) 100%);
-    pointer-events: none;
-}
+    .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.4) 0%, rgba(30, 64, 175, 0.3) 100%);
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%);
+        pointer-events: none;
+        z-index: 1;
+    }
 
 .hero-content {
     position: relative;
     z-index: 2;
     text-align: center;
-    padding: 1rem;
-}
-
-.hero-content h1 {
-    margin: 0;
-    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
-    font-weight: 700;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.45);
-}
-
-.hero-content p {
-    margin: 0.5rem 0 0;
-    opacity: 0.9;
-}
-
-/* HERO fullscreen con efecto 3D */
-.hero-full {
-    position: fixed;
-    inset: 0;
-    height: 100vh;
-    width: 100%;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.35s ease-out, transform 0.35s ease-out, filter 0.35s ease-out;
-    will-change: opacity, transform, filter;
-    backface-visibility: hidden;
-}
-
-.hero-full::after {
-    /* máscara ligera para legibilidad */
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.08) 50%, rgba(255,255,255,0));
-    pointer-events: none;
-}
-
-/* Contenedor del contenido de la página que "se superpone" */
-.page-wrapper {
-    position: relative;
-    z-index: 10;
-    margin-top: 100vh; /* deja el viewport de la hero antes de mostrar contenido */
-    transform-origin: top center;
-    perspective: 1200px;
-    background: #ffffff;
-    border-radius: 18px 18px 0 0;
-    box-shadow: 0 -8px 30px rgba(0,0,0,0.08);
-    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
-    overflow: visible;
-}
-
-/* Clase activa cuando se está haciendo scroll para acentuar elevación */
-.page-wrapper.lift {
-    box-shadow: 0 30px 80px rgba(0,0,0,0.18);
-}
-
-/* interno del contenido */
-.page-inner {
     padding: 2rem;
-    min-height: 60vh;
+    animation: fadeInUp 0.8s ease-out;
 }
 
-/* ajustes responsive */
-@media (max-width: 768px) {
-    .page-inner { padding: 1rem; border-radius: 0; }
-    .page-wrapper { border-radius: 12px 12px 0 0; }
+    .hero-content h1 {
+        margin: 0;
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: 800;
+        text-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 40px rgba(37, 99, 235, 0.3);
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        background: linear-gradient(to right, #ffffff, #e0e7ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-content p {
+        margin: 1.5rem 0 0;
+        font-size: clamp(1rem, 2vw, 1.5rem);
+        font-weight: 500;
+        opacity: 0.95;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        letter-spacing: 0.02em;
+    }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

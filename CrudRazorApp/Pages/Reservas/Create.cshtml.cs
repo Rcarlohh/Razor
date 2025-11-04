@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -21,6 +22,12 @@ namespace CrudRazorApp.Pages.Reservas
 
         public async Task OnGetAsync()
         {
+            // Establecer la fecha de hoy como fecha de inicio (con hora actual)
+            Reserva.FechaInicio = DateTime.Now;
+
+            // Establecer la fecha de fin como un día después (puedes ajustar esto)
+            Reserva.FechaFin = DateTime.Now.AddDays(1);
+
             AutosList = new SelectList(await _context.Autos.AsNoTracking().ToListAsync(), "Id", "Placa");
             ConductoresList = new SelectList(await _context.Conductores.AsNoTracking().ToListAsync(), "Id", "Nombre");
         }

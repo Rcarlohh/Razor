@@ -10,6 +10,14 @@
     <symbol id="icon-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></symbol>
 </svg>
 
+<!-- Hero: imagen de fondo horizontal que se desvanece al hacer scroll -->
+<div id="hero" class="hero" style="background-image: url('/images/hero.jpg');">
+    <div class="hero-content">
+        <h1>Bienvenido</h1>
+        <p>Gestión de reservas rápida y sencilla</p>
+    </div>
+</div>
+
 <h1 class="page-title">Panel de Control</h1>
 <p class="page-subtitle">Análisis de la actividad y rendimiento de la flota.</p>
 
@@ -180,6 +188,38 @@
         .card > div[style*="padding: 0"] .content-table tbody td:last-child {
             padding-right: 2rem;
         }
+
+    /* Estilos para el hero */
+    .hero {
+        position: relative;
+        height: 60vh;
+        max-height: 500px;
+        background-position: center;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+        padding: 0 1rem;
+        overflow: hidden;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
 </style>
 
 <script>
@@ -212,4 +252,26 @@
             }
         });
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const hero = document.getElementById('hero');
+        if (!hero) return;
+        let maxScroll = hero.offsetHeight || window.innerHeight * 0.45;
+
+        function updateHero() {
+            const sc = Math.min(window.scrollY, maxScroll);
+            const opacity = Math.max(0, 1 - sc / maxScroll);
+            hero.style.opacity = opacity;
+            // ligero parallax para sensación de profundidad
+            hero.style.transform = `translateY(${sc * 0.12}px)`;
+        }
+
+        window.addEventListener('scroll', updateHero, { passive: true });
+        window.addEventListener('resize', function () {
+            maxScroll = hero.offsetHeight || window.innerHeight * 0.45;
+            updateHero();
+        });
+
+        updateHero();
+    });
 </script>

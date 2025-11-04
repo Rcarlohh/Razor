@@ -5,6 +5,15 @@
     ViewData["Title"] = "Reservas";
 }
 
+@if (!string.IsNullOrEmpty(Request.Query["message"].ToString()))
+{
+    var isError = Request.Query["error"] == "True";
+    <div class="alert @(isError ? "alert-error" : "alert-success") alert-dismissible">
+        @Request.Query["message"]
+        <button type="button" class="close-button" onclick="this.parentElement.style.display='none'">&times;</button>
+    </div>
+}
+
 <div class="page-header">
     <div>
         <h1 class="page-title">Gestión de Reservas</h1>

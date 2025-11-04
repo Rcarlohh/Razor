@@ -5,13 +5,23 @@
     ViewData["Title"] = "Crear Auto";
 }
 
+<div class="back-button-container">
+    <a asp-page="./Index" class="back-button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Volver al listado
+    </a>
+</div>
+
 <h1 class="page-title">Registrar un Auto Nuevo</h1>
 <p class="page-subtitle">Rellena los siguientes campos para añadir un vehículo a la flota.</p>
 
 <div class="card" style="max-width: 800px;">
     <form method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        
+
         <div class="form-layout">
             <div class="form-group">
                 <label asp-for="Auto.Marca"></label>
@@ -45,12 +55,19 @@
         </div>
 
         <div class="actions" style="margin-top: 2rem;">
-            <button type="submit" class="btn-primary">Guardar Vehículo</button>
+            <button type="submit" class="btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Guardar Vehículo
+            </button>
             <a class="btn-secondary" asp-page="./Index">Cancelar</a>
         </div>
     </form>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

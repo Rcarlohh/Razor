@@ -120,8 +120,6 @@
 
                             <span>
                                 @User.FindFirst("NombreCompleto")?.Value
-                                ?? @User.FindFirst(ClaimTypes.Name)?.Value
-                                ?? "Usuario"
                             </span>
 
                             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
@@ -132,8 +130,7 @@
                         <div class="user-menu-dropdown" id="userMenuDropdown">
                             <div class="user-menu-header">
                                 <strong>
-                                    @User.FindFirst("NombreCompleto")?.Value
-                                    ?? User.Identity.Name
+                                    @User.FindFirst("NombreCompleto")
                                 </strong>
                                 <small>
                                     @User.FindFirst(ClaimTypes.Email)?.Value
